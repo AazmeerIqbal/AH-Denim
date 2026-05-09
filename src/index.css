@@ -4,17 +4,32 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #030b13;
 }
 
-@media (min-width : 768px) and (max-width: 1024px) {
-    .container {
-        width: 45%;
-        height: 100%;
-        --color: rgba(114, 114, 114, 0.3);
-        background-color: #191a1a;
-        background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
-            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
-        background-size: 55px 55px;
-      }
+body {
+  background-color: #030b13;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+/* ── Scroll indicator dot (used in Hero) ── */
+@keyframes scrollDot {
+  0%, 100% { transform: translateY(0);   opacity: 0.5; }
+  50%       { transform: translateY(6px); opacity: 1;   }
+}
+
+/* ── Subtle pulse for play button ── */
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(59,130,246,0.3); }
+  70%  { box-shadow: 0 0 0 10px rgba(59,130,246,0); }
+  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+}
+
+/* ── Tablet grid override for capabilities icons ── */
+@media (max-width: 768px) {
+  .cap-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }

@@ -7,7 +7,7 @@ import AboutUS from "./pages/AboutUs";
 
 function App() {
   return (
-    <div className="min-h-screen font-poppins font-light not-italic bg-white ">
+    <div className="min-h-screen font-poppins font-light not-italic" style={{ backgroundColor: "#030b13" }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ContactUS" element={<ContactUs />} />

@@ -48,15 +48,14 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 w-full backdrop-blur-md z-50 shadow-lg ${isScrolled ? "bg-[#222222]" : "bg-transparent"
-        }`}
+      className={`fixed top-0 left-0 right-0 w-full backdrop-blur-md z-50 ${isScrolled ? "shadow-lg" : ""}`}
+      style={{ backgroundColor: isScrolled ? "rgba(3,11,19,0.95)" : "transparent", borderBottom: isScrolled ? "1px solid rgba(255,255,255,0.06)" : "none", transition: "background-color 0.4s ease, border-color 0.4s ease" }}
     >
       <div className="px-4 sm:px-6 h-18 lg:px-8">
         <div className="flex items-center">
           <div className="flex justify-between md:justify-normal w-full md:w-auto items-center">
             <button
-              className={`md:hidden -ml-2 p-2 flex order-2 ${isScrolled ? "text-[#ffffff]" : "text-[#222222]"
-                }`}
+              className="md:hidden -ml-2 p-2 flex order-2 text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <IoMenuOutline size={25} />}
@@ -102,10 +101,11 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden ${isMenuOpen
+        className={`md:hidden text-white ${isMenuOpen
           ? "max-h-[500px] opacity-100 visible transition-all duration-300 ease-in"
           : "max-h-0 opacity-0 invisible transition-all duration-300 ease-out"
-          } ${isScrolled ? "text-[#222222]" : "text-[#ffffff]"}`}
+          }`}
+        style={{ backgroundColor: "rgba(3,11,19,0.97)" }}
       >
         <div className="px-2 pt-4 pb-4 font-normal">
           <Link to="/" className="block p-4">
@@ -121,11 +121,8 @@ const Navbar = () => {
               <RiArrowDownSLine size={16} className="mt-1" />
             </button>
             <div
-              className={`overflow-hidden px-2 py-0 rounded-lg shadow-lg flex flex-col relative left-[7%] transition-all duration-300 ease-in-out ${open ? "max-h-[150px] opacity-100 py-4" : "max-h-0 opacity-0"
-                } ${isScrolled
-                  ? "bg-[#222222] text-[#ffffff]"
-                  : "bg-[#ffffff] text-[#222222]"
-                }`}
+              className={`overflow-hidden px-2 py-0 rounded-lg shadow-lg flex flex-col relative left-[7%] transition-all duration-300 ease-in-out text-white ${open ? "max-h-[150px] opacity-100 py-4" : "max-h-0 opacity-0"}`}
+              style={{ backgroundColor: "rgba(7,21,41,0.98)", border: "1px solid rgba(255,255,255,0.08)" }}
             >
               <Link
                 className="hover:scale-110 block p-2"
