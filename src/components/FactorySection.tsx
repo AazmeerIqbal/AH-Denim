@@ -132,14 +132,14 @@ const FactorySection = () => {
         }}
       >
         <img
-          src="/images/AboutUsImage.jpeg"
+          src="/images/factory production.png"
           alt="AH Denim Factory"
           style={{
             width: '100%',
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            filter: 'brightness(0.28) contrast(1.1) saturate(0.35)',
+            // filter: 'brightness(0.28) contrast(1.1) saturate(0.35)',
           }}
         />
       </div>
