@@ -167,6 +167,7 @@ const Footer = () => {
                 { label: "Our Story", to: "/AboutUs#our-video" },
                 { label: "Our Expo", to: "/AboutUs#our-expo" },
                 { label: "Overview", to: "/AboutUs#overview" },
+                { label: "FAQs", to: "/Faqs" },
               ].map(({ label, to }) => (
                 <FooterLink key={label} label={label} to={to} />
               ))}

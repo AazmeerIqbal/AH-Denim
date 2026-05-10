@@ -35,16 +35,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleFAQClick = () => {
-    if (location.pathname === "/") {
-      document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      navigate("/");
-      setTimeout(() => {
-        document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" });
-      }, 500);
-    }
-  };
+
 
   return (
     <nav
@@ -92,9 +83,7 @@ const Navbar = () => {
             </div>
             <Link to="/AboutUS">About Us</Link>
             <Link to="/ContactUS">Contact Us</Link>
-            <Link to="/#faq" onClick={handleFAQClick}>
-              FAQ
-            </Link>
+            <Link to="/Faqs">FAQ</Link>
           </div>
         </div>
       </div>
@@ -150,6 +139,9 @@ const Navbar = () => {
           </Link>
           <Link to="/ContactUs" className="block p-4">
             Contact US
+          </Link>
+          <Link to="/Faqs" className="block p-4">
+            FAQ
           </Link>
         </div>
       </div>

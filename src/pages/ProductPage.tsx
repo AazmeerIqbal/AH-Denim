@@ -1,28 +1,31 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import Navbar from "../components/Navbar";
 import { Lightbox } from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import {
-  Captions,
-  Download,
-  Fullscreen,
-  Zoom,
-} from "yet-another-react-lightbox/plugins";
-
+import { Captions, Download, Fullscreen, Zoom } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/plugins/captions.css";
 import Footer from "../components/Footer";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const ProductPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.state);
-
+  
   const product = location.state;
   const category = location.state?.category || "Man";
 
+  const { ref: contentRef, visible: contentVisible } = useScrollReveal(0.1);
+
   if (!product)
-    return <div className="text-center mt-10 text-2xl">Product not found</div>;
+    return (
+      <div className="min-h-screen bg-[#030b13] flex flex-col justify-center items-center text-white">
+        <Navbar />
+        <h1 className="text-2xl font-bold tracking-widest uppercase">Product not found</h1>
+        <button onClick={() => navigate("/")} className="mt-6 text-blue-400 hover:text-blue-300">Return Home</button>
+      </div>
+    );
 
   const images: string[] = product.src || [];
 
@@ -34,18 +37,22 @@ const ProductPage = () => {
     setOpen(true);
   };
 
-  return (
-    <>
-      <div>
-        <Navbar />
+  const sizes = ["S", "M", "L", "XL"];
 
-        <div className="min-h-screen mt-[5rem]">
-          {/* 🔙 Back Button */}
+  return (
+    <div className="min-h-screen flex flex-col bg-[#030b13] text-[#ffffff] font-sans">
+      <Navbar />
+
+      <main className="flex-grow pt-32 pb-24 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Back Button */}
           <button
             onClick={() => navigate(`/items?category=${category}`)}
-            className="text-base p-2  md:text-lg  bg-gray-200 rounded-lg shadow hover:bg-gray-300 my-10 mx-4 2xl:mx-16"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.2em] uppercase font-bold text-white/50 hover:text-blue-400 transition-colors mb-10 group"
           >
-            ← Go Back
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Catalog
           </button>
 
           <Lightbox
@@ -55,177 +62,131 @@ const ProductPage = () => {
             slides={images.map((img) => ({ src: img }))}
             open={open}
             index={currentIndex}
+            styles={{ container: { backgroundColor: "rgba(3, 11, 19, 0.95)" } }}
           />
 
-          {/* 🖼️ Image Grid */}
-          <div className="hidden md:flex gap-20 md:px-5 lg:p-12 2xl:p-16 pb-10">
-            <div
-              className={`grid w-auto ${
-                images.length > 1 ? "grid-cols-2" : "grid-cols-1"
-              } gap-8`}
-            >
-              {images.map((img: string, idx: number) => (
-                <img
-                  onClick={() => openLightbox(idx)}
-                  key={idx}
-                  src={img}
-                  alt={`Product Image ${idx}`}
-                  className="md:w-[250px] md:h-[300px] lg:w-[285px] lg:h-[420px] 2xl:w-[410px] 2xl:h-[600px] object-cover shadow-md"
-                />
-              ))}
-            </div>
-            <div className="flex flex-col gap-5 md:text-[15px] 2xl:text-[17px] md:w-[45%] 2xl:w-[55%] mt-5">
-              <h2 className=" md:text-[18px] 2xl:text-2xl font-sans font-medium tracking-[3px] uppercase mb-5">
-                {product.title}
-              </h2>
-              <div className="uppercase">
-                <span className="font-bold font-serif">Fit & Style: </span>
-                {product.fit}
+          <section
+            ref={contentRef}
+            style={{
+              opacity: contentVisible ? 1 : 0,
+              transform: contentVisible ? "translateY(0)" : "translateY(32px)",
+              transition: "opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s",
+            }}
+            className="flex flex-col lg:flex-row gap-12 lg:gap-20"
+          >
+            {/* Desktop Image Grid / Mobile Main Image */}
+            <div className="w-full lg:w-[55%]">
+              {/* Desktop Grid */}
+              <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {images.map((img: string, idx: number) => (
+                  <div 
+                    key={idx}
+                    className="relative aspect-[3/4] rounded-sm overflow-hidden border border-white/10 bg-black/50 cursor-zoom-in group"
+                    onClick={() => openLightbox(idx)}
+                  >
+                    <div className="absolute inset-0 bg-blue-500/0 mix-blend-screen group-hover:bg-blue-500/10 transition-colors duration-500 z-10 pointer-events-none" />
+                    <img
+                      src={img}
+                      alt={`${product.title} view ${idx + 1}`}
+                      className="w-full h-full object-cover filter contrast-[1.1] brightness-[0.85] group-hover:brightness-[1] transition-all duration-700"
+                    />
+                  </div>
+                ))}
               </div>
-              <div>
-                <p
-                  className="font-normal mb-5
-                "
+
+              {/* Mobile Carousel */}
+              <div className="md:hidden flex flex-col gap-4">
+                <div 
+                  className="relative w-full aspect-[3/4] rounded-sm overflow-hidden border border-white/10 bg-black/50 cursor-zoom-in"
+                  onClick={() => openLightbox(currentIndex)}
                 >
+                  <img
+                    src={images[currentIndex]}
+                    alt="Product"
+                    className="w-full h-full object-cover filter contrast-[1.1] brightness-[0.9]"
+                  />
+                </div>
+                <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                  {images.map((img: string, idx: number) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt={`Thumbnail ${idx}`}
+                      className={`w-20 h-24 object-cover cursor-pointer rounded-sm border transition-all ${
+                        idx === currentIndex
+                          ? "border-blue-400 opacity-100"
+                          : "border-white/10 opacity-50 hover:opacity-80"
+                      }`}
+                      onClick={() => setCurrentIndex(idx)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Product Details */}
+            <div className="w-full lg:w-[45%] flex flex-col gap-8 lg:sticky lg:top-32 h-fit">
+              <div className="border-b border-white/10 pb-8">
+                <p className="text-blue-300/65 text-[0.6rem] font-semibold tracking-[0.3em] uppercase mb-4">
+                  {category} Collection
+                </p>
+                <h1 className="font-['Arial_Black',Impact,sans-serif] font-black text-[clamp(1.8rem,3vw,2.5rem)] uppercase leading-[1.1] tracking-[-0.02em] mb-6">
+                  {product.title}
+                </h1>
+                
+                <div className="flex flex-col gap-2 mb-6">
+                  <div className="flex gap-2 items-baseline">
+                    <span className="text-[0.65rem] tracking-[0.15em] uppercase text-white/50">Fit & Style:</span>
+                    <span className="text-[0.85rem] font-light text-white/90">{product.fit || "Standard Fit"}</span>
+                  </div>
+                  <div className="flex gap-2 items-baseline">
+                    <span className="text-[0.65rem] tracking-[0.15em] uppercase text-white/50">Color:</span>
+                    <span className="text-[0.85rem] font-light text-white/90">All washes available</span>
+                  </div>
+                </div>
+
+                <p className="text-[0.8rem] text-white/50 font-light leading-[1.8] tracking-[0.03em]">
                   {product.disc}
                 </p>
               </div>
 
-              <div className="flex flex-col items-start gap-4">
-                <span className="text-center text-lg font-serif uppercase">
-                  Size
-                </span>
-                <div className="flex items-center gap-4">
-                  <div className="relative flex  h-[40px] w-[40px] 2xl:h-[50px] 2xl:w-[50px] items-center justify-center">
-                    <div className="text-lg 2xl:text-xl font-bold text-black z-50">
-                      S
+              <div className="flex flex-col gap-4">
+                <h3 className="text-[0.65rem] tracking-[0.15em] uppercase text-white/50">Available Sizes</h3>
+                <div className="flex flex-wrap items-center gap-4">
+                  {sizes.map((size) => (
+                    <div key={size} className="relative group cursor-pointer">
+                      <input 
+                        type="radio" 
+                        name="size" 
+                        id={`size-${size}`} 
+                        className="peer sr-only" 
+                        defaultChecked={size === "M"}
+                      />
+                      <label 
+                        htmlFor={`size-${size}`}
+                        className="w-12 h-12 flex items-center justify-center rounded-full border border-white/20 bg-white/[0.02] text-white/70 font-bold text-[0.85rem] transition-all cursor-pointer peer-checked:border-blue-400 peer-checked:bg-blue-500/10 peer-checked:text-blue-300 hover:border-white/50 peer-checked:shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                      >
+                        {size}
+                      </label>
                     </div>
-                    <div className="absolute h-full w-full rounded-full bg-blue-100 p-4 shadow-sm shadow-[#00000050] ring-blue-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-blue-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                  <div className="relative flex h-[40px] w-[40px] 2xl:h-[50px] 2xl:w-[50px] items-center justify-center">
-                    <div className="text-lg 2xl:text-xl font-bold text-black z-50">
-                      M
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-pink-100 p-2 shadow-sm shadow-[#00000050] ring-pink-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-pink-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                  <div className="relative flex h-[40px] w-[40px] 2xl:h-[50px] 2xl:w-[50px] items-center justify-center">
-                    <div className="text-lg 2xl:text-xl font-bold text-black z-50">
-                      L
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-purple-100 p-2 shadow-sm shadow-[#00000050] ring-purple-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-purple-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                  <div className="relative flex h-[40px] w-[40px] 2xl:h-[50px] 2xl:w-[50px] items-center justify-center">
-                    <div className="text-lg 2xl:text-xl font-bold text-black z-50">
-                      XL
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-neutral-100 p-2 shadow-sm shadow-[#00000050] ring-neutral-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-neutral-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
+                  ))}
                 </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <h5 className="text-lg uppercase tracking-[2px] font-serif">
-                  Color
-                </h5>
-                <div>All washes available.</div>
-              </div>
-            </div>
-          </div>
 
-          <div className="md:hidden flex flex-col items-center gap-4 px-3 sm:px-4">
-            {/* 🖼️ Image Carousel */}
-            <div className="relative w-full h-[500px] sm:h-[600px]">
-              <img
-                src={images[currentIndex]}
-                alt="Product"
-                className="w-full h-full object-cover shadow-lg"
-              />
-            </div>
-            {/* 🖼️ Thumbnails for Mobile */}
-            <div className="flex gap-3 mt-5">
-              {images.map((img: string, idx: number) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`Thumbnail ${idx}`}
-                  className={`w-20 h-20 object-cover cursor-pointer ${
-                    idx === currentIndex
-                      ? "border-2 border-black scale-105"
-                      : ""
-                  }`}
-                  onClick={() => setCurrentIndex(idx)}
-                />
-              ))}
-            </div>
-            <div className="flex flex-col gap-5 text-[15px] mt-5 mb-10">
-              <h2 className="text-[18px] font-sans font-medium mb-5 tracking-[3px] sm:text-[18px] text-center ">
-                {product.title}
-              </h2>
-
-              <div className="uppercase ">
-                <span className="font-bold font-serif ">Fit & Style: </span>
-                {product.fit}
-              </div>
-              <div>
-                <p
-                  className="font-normal mb-5
-                "
-                >
-                  {product.disc}
+              <div className="mt-8 bg-blue-500/5 border border-blue-500/20 rounded-sm p-6">
+                <h4 className="text-[0.65rem] tracking-[0.15em] uppercase text-blue-300 mb-2">Inquiry</h4>
+                <p className="text-[0.75rem] text-white/50 font-light leading-[1.6]">
+                  Interested in this product? Please contact our sales team with the product name for bulk orders and customization options.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-4 mb-4">
-                <h5 className="text-lg uppercase tracking-[2px] font-serif">
-                  Size
-                </h5>
-                <div className="flex items-center gap-4">
-                  <div className="relative flex h-[40px] w-[40px] items-center justify-center">
-                    <div className="text-[17px] font-bold text-black z-50">
-                      S
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-blue-100 p-4 shadow-sm shadow-[#00000050] ring-blue-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-blue-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                  <div className="relative flex h-[40px] w-[40px] items-center justify-center">
-                    <div className="text-[17px] font-bold text-black z-50">
-                      M
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-pink-100 p-2 shadow-sm shadow-[#00000050] ring-pink-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-pink-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                  <div className="relative flex h-[40px] w-[40px] items-center justify-center">
-                    <div className="text-[17px] font-bold text-black z-50">
-                      L
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-purple-100 p-2 shadow-sm shadow-[#00000050] ring-purple-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-purple-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                  <div className="relative flex h-[40px] w-[40px] items-center justify-center">
-                    <div className="text-[17px] font-bold text-black z-50">
-                      XL
-                    </div>
-                    <div className="absolute h-full w-full rounded-full bg-neutral-100 p-2 shadow-sm shadow-[#00000050] ring-neutral-400 duration-300 peer-checked:scale-110 peer-checked:ring-2"></div>
-                    <div className="absolute -z-10 h-full w-full scale-0 rounded-full bg-neutral-200 duration-500 peer-checked:scale-[500%]"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <h5 className="text-lg uppercase tracking-[2px] font-serif">
-                  Color
-                </h5>
-                <div>All washes available.</div>
-              </div>
             </div>
-          </div>
+          </section>
         </div>
-        <Footer />
-      </div>
-    </>
+      </main>
+
+      <Footer />
+    </div>
   );
 };
 

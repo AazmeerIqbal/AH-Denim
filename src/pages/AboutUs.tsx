@@ -1,6 +1,5 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { BsEmojiSmile } from "react-icons/bs";
 import AboutVideo from "/About Video.mp4";
 import AboutUsImage from "/images/AboutUsImage.jpeg";
 import ExpoImage1 from "/images/ExpoImage1.jpeg";
@@ -15,10 +14,9 @@ import ExpoImage8 from "/images/ExpoImage8.jpeg";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const images = [
   ExpoImage1,
@@ -34,15 +32,11 @@ const images = [
 const AboutUs = () => {
   const [index, setIndex] = useState(0);
 
-  const nextSlide = () => {
-    setIndex((prev) => (prev + 1) % images.length);
-  };
+  const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
+  const prevSlide = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
 
-  const prevSlide = () => {
-    setIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
   useEffect(() => {
-    const interval = setInterval(nextSlide, 4000);
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [index]);
 
@@ -54,285 +48,241 @@ const AboutUs = () => {
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
+    } else {
+      window.scrollTo(0, 0);
     }
   }, [location]);
 
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
+  const { ref: overviewRef, inView: overviewInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
   });
 
+  const { ref: aboutRef, visible: aboutVisible } = useScrollReveal(0.1);
+  const { ref: videoRef, visible: videoVisible } = useScrollReveal(0.1);
+  const { ref: expoRef, visible: expoVisible } = useScrollReveal(0.1);
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#030b13] text-[#ffffff] font-sans">
       <Navbar />
 
-      <div className="text-[15px] sm:text-[16px]">
+      <main className="flex-grow pt-24 pb-16">
         {/* About Section */}
         <section
+          ref={aboutRef}
           id="about-us"
-          className="px-3 md:px-6 lg:px-12 2xl:px-0 2xl:w-[90%] mt-24 mx-auto"
+          style={{
+            padding: "clamp(3rem, 6vw, 5.5rem) clamp(1.5rem, 6vw, 5rem)",
+            opacity: aboutVisible ? 1 : 0,
+            transform: aboutVisible ? "translateY(0)" : "translateY(32px)",
+            transition: "opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s",
+          }}
         >
-          <div className="flex flex-col md:flex-row gap-20  mx-auto ">
-            <div className="w-full">
-              <h2 className="text-[26px] sm:text-3xl 2xl:text-[40px]  mt-5 font-bold font-serif mb-4 text-[#4D4D4D]">
-                About Us
-              </h2>
-              <p className="leading-relaxed font-normal text-justify text-sm sm:text-base">
-                <span className="block mb-3">
-                  <strong>Founded in 2000:</strong> AH Denim has grown into a
-                  leading cut-to-pack manufacturer, specializing in denim and
-                  woven garments for men, women, and kids. With two
-                  state-of-the-art manufacturing units and a monthly production
-                  capacity of 150,000 garments, we provide end-to-end
-                  solutions—from design development to final packaging, all
-                  under one roof.
-                </span>
-                <span className="block mb-3">
-                  <strong>Why Choose AH Denim?</strong>
-                </span>
-                <ul className="list-disc list-inside mb-3 space-y-2">
-                  <li>
-                    <strong> Cut-to-Pack Solutions:</strong> We manage every
-                    stage of production in-house—design, cutting, stitching,
-                    washing, finishing, and packaging—ensuring superior quality
-                    control and faster turnaround times.
-                  </li>
-                  <li>
-                    <strong> Advanced Manufacturing Facilities:</strong> Our
-                    units are equipped with the latest technology and modern
-                    laundry systems, allowing us to deliver precision-crafted
-                    garments with intricate detailing and sustainable practices.
-                  </li>
-                  <li>
-                    <strong> Sustainability Commitment:</strong> We are
-                    dedicated to reducing our environmental impact by following
-                    eco-friendly washing techniques, minimizing water and energy
-                    consumption, and adhering to ethical manufacturing
-                    standards.
-                  </li>
-                  <li className="hidden 2xl:block">
-                    <strong>Compliance & Ethical Practices: </strong>We maintain
-                    strict compliance protocols to ensure safe working
-                    conditions, fair wages, and transparency across all levels
-                    of production
-                  </li>
-                  <li className="hidden 2xl:block">
-                    <strong>Flexible Production:</strong> From small-batch
-                    orders to large-scale manufacturing, we adapt to your
-                    needs—offering flexibility without compromising on quality.
-                  </li>
-                </ul>
-                <span className="hidden 2xl:block my-2">
-                  <strong>Explore our factory in the video below,</strong> where
-                  we showcase every stage of our advanced manufacturing
-                  process—highlighting our dedication to quality, compliance,
-                  and sustainability.
-                </span>
-                <span className="hidden 2xl:block">
-                  <strong> At AH Denim,</strong> we combine decades of expertise
-                  with modern innovation to redefine the future of apparel
-                  manufacturing. Let us bring your vision to life—responsibly,
-                  efficiently, and with unmatched craftsmanship.
-                </span>
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 max-w-7xl mx-auto items-center">
+            <div className="w-full lg:w-1/2">
+              <p className="text-blue-300/65 text-[0.6rem] font-semibold tracking-[0.3em] uppercase mb-4">
+                Our Story
               </p>
+              <h2 className="font-['Arial_Black',Impact,sans-serif] font-black text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.0] tracking-[-0.02em] mb-6">
+                Legacy of<br />Excellence
+              </h2>
+              
+              <div className="space-y-6 text-[0.8rem] text-white/50 font-light leading-[1.8] tracking-[0.03em]">
+                <p>
+                  <strong className="text-white/80 font-semibold tracking-wider">FOUNDED IN 2000</strong> — AH Denim has grown into a leading cut-to-pack manufacturer, specializing in denim and woven garments for men, women, and kids. With two state-of-the-art manufacturing units and a monthly production capacity of 150,000 garments, we provide end-to-end solutions—from design development to final packaging, all under one roof.
+                </p>
+                
+                <div className="border-l border-blue-400/20 pl-6 py-2 space-y-4">
+                  <p>
+                    <strong className="text-blue-300/80 uppercase text-[0.7rem] tracking-wider block mb-1">Cut-to-Pack Solutions</strong>
+                    Managing every stage of production in-house—ensuring superior quality control and faster turnaround times.
+                  </p>
+                  <p>
+                    <strong className="text-blue-300/80 uppercase text-[0.7rem] tracking-wider block mb-1">Advanced Facilities</strong>
+                    Equipped with modern laundry systems for precision-crafted garments and sustainable practices.
+                  </p>
+                  <p>
+                    <strong className="text-blue-300/80 uppercase text-[0.7rem] tracking-wider block mb-1">Sustainability</strong>
+                    Dedicated to reducing environmental impact by following eco-friendly washing techniques.
+                  </p>
+                </div>
+              </div>
             </div>
-            {/* Image Section */}
-            <div className="w-full md:w-1/2 lg:w-1/2">
+            
+            <div className="w-full lg:w-1/2 relative group">
+              <div className="absolute inset-0 bg-blue-500/10 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-full" />
               <img
                 src={AboutUsImage}
-                className="h-[60vh] md:h-[70vh] w-full rounded-lg object-cover"
-                alt="AboutUsImage"
+                alt="AH Denim Facility"
+                className="w-full h-[50vh] lg:h-[70vh] object-cover rounded-sm border border-white/10 filter brightness-[0.85] contrast-[1.1] group-hover:brightness-100 transition-all duration-700"
               />
+              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <p className="text-[0.6rem] tracking-[0.2em] text-white/70 uppercase">State of the art manufacturing</p>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* Video Section */}
         <section
+          ref={videoRef}
           id="our-video"
-          className="relative mt-0 mb-10 sm:my-10 md:mt-10  flex items-center justify-center"
+          style={{
+            padding: "clamp(2rem, 4vw, 4rem) 0",
+            opacity: videoVisible ? 1 : 0,
+            transform: videoVisible ? "translateY(0)" : "translateY(32px)",
+            transition: "opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s",
+          }}
         >
-          <video className="w-full h-[50vh] md:h-[75vh]" controls>
-            <source src={AboutVideo} type="video/mp4" />
-          </video>
+          <div className="max-w-[95%] mx-auto relative border border-white/10 rounded-sm overflow-hidden bg-black/50">
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(3,11,19,0.8)_100%)] z-10" />
+            <video 
+              className="w-full h-[40vh] md:h-[65vh] object-cover opacity-80 mix-blend-screen" 
+              controls
+              poster={AboutUsImage}
+            >
+              <source src={AboutVideo} type="video/mp4" />
+            </video>
+          </div>
         </section>
 
+        {/* Overview Numbers */}
         <section
-          ref={ref}
+          ref={overviewRef}
           id="overview"
-          className="px-8 text-center py-16 my-20 text-[#ffffff] bg-black"
+          style={{
+            background: "radial-gradient(ellipse 60% 80% at 50% 50%, rgba(13,33,71,0.5) 0%, #030b13 65%)",
+            padding: "clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem)",
+            borderTop: "1px solid rgba(255,255,255,0.03)",
+            borderBottom: "1px solid rgba(255,255,255,0.03)",
+          }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-20 font-serif">
-            OVERVIEW
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Capacity */}
-            <div className="flex flex-col items-center text-center">
-              <div className="text-6xl">
-                <BsEmojiSmile size={60} />
-              </div>
-              <h3 className="text-xl font-bold font-serif  mt-4">Capacity</h3>
-              <p className="mt-4 text-gray-400">
-                We currently have a capacity of{" "}
-                <span>
-                  {inView && <CountUp start={0} end={400000} duration={2.5} />}
-                </span>{" "}
-                garments per month which is increasing gradually
-              </p>
-            </div>
-
-            {/* Workforce */}
-            <div className="flex flex-col items-center text-center">
-              <div className="text-6xl">
-                <BsEmojiSmile size={60} />
-              </div>
-              <h3 className="text-xl font-bold font-serif mt-4">Workforce</h3>
-              <p className=" mt-4 text-gray-400">
-                A team of{" "}
-                <span>
-                  {inView && <CountUp start={0} end={2000} duration={2.5} />}
-                </span>{" "}
-                hardworking members
-              </p>
-            </div>
-
-            {/* Revenue */}
-            <div className="flex flex-col items-center text-center">
-              <div className="text-6xl">
-                <BsEmojiSmile size={60} />
-              </div>
-              <h3 className="text-xl font-bold font-serif mt-4">Revenue</h3>
-              <p className=" mt-4 text-gray-400">
-                We are at a revenue of USD{" "}
-                <span>
-                  {inView && <CountUp start={0} end={30} duration={2.5} />}
-                </span>{" "}
-                Million per year and continue to grow
-              </p>
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-center font-['Arial_Black',Impact,sans-serif] text-[clamp(1.5rem,3vw,2.5rem)] uppercase tracking-[-0.02em] mb-16 text-white/90">
+              Overview
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 divide-y md:divide-y-0 md:divide-x divide-white/10">
+              {[
+                { label: "Monthly Capacity", end: 400000, suffix: "+", desc: "Garments produced per month with continuous growth" },
+                { label: "Global Workforce", end: 2000, suffix: "+", desc: "Dedicated professionals crafting premium denim" },
+                { label: "Annual Revenue", end: 30, prefix: "$", suffix: "M", desc: "Consistent growth in the international market" }
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col items-center text-center px-6 py-8 md:py-0">
+                  <div className="text-[clamp(2.5rem,5vw,4rem)] font-black tracking-tighter text-blue-300/90 leading-none mb-4" style={{ fontFamily: "Impact, sans-serif" }}>
+                    {stat.prefix}
+                    {overviewInView ? <CountUp start={0} end={stat.end} duration={3} separator="," /> : "0"}
+                    {stat.suffix}
+                  </div>
+                  <h3 className="text-[0.7rem] font-bold tracking-[0.2em] uppercase text-white/80 mb-3">
+                    {stat.label}
+                  </h3>
+                  <p className="text-[0.7rem] text-white/40 leading-relaxed font-light">
+                    {stat.desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Expo Section */}
         <section
+          ref={expoRef}
           id="our-expo"
-          className="px-3 md:px-6 lg:px-12 2xl:px-20 pb-16"
+          style={{
+            padding: "clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem)",
+            opacity: expoVisible ? 1 : 0,
+            transform: expoVisible ? "translateY(0)" : "translateY(32px)",
+            transition: "opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s",
+          }}
         >
-          <div className="flex flex-col">
-            <h2 className="text-[26px] sm:text-3xl text-center 2xl:text-[40px] font-bold font-serif mb-8 pb-2 text-[#4D4D4D]">
-              Our Expo
-            </h2>
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-blue-300/65 text-[0.6rem] font-semibold tracking-[0.3em] uppercase mb-3">Global Reach</p>
+              <h2 className="font-['Arial_Black',Impact,sans-serif] text-[clamp(2rem,4vw,3.5rem)] uppercase tracking-[-0.02em] text-white/90">
+                Our Expo
+              </h2>
+            </div>
 
-            <div className="2xl:flex 2xl:flex-row flex flex-col gap-4">
-              <div className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg ">
-                <motion.div
-                  key={index}
-                  className="flex"
-                  initial={{ opacity: 0.6, x: "100%" }}
-                  animate={{ opacity: 1, x: "0%" }}
-                  exit={{ opacity: 0, x: "-100%" }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                >
+            <div className="flex flex-col lg:flex-row gap-10 items-start">
+              {/* Slider */}
+              <div className="w-full lg:w-[55%] relative group">
+                <div className="overflow-hidden rounded-sm border border-white/10 bg-black/50 aspect-[4/3] relative">
                   <img
+                    key={index}
                     src={images[index]}
-                    alt={`Expo Slide ${index + 1}`}
-                    className="w-full h-[50vh] sm:h-[65vh] 2xl:h-[80vh] object-cover rounded-lg"
+                    alt={`Expo ${index + 1}`}
+                    className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.1] transition-opacity duration-1000"
+                    style={{ animation: "fadeIn 0.5s ease-in-out" }}
                   />
-                </motion.div>
-
-                {/* Navigation Buttons */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030b13] via-transparent to-transparent opacity-80" />
+                </div>
+                
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/80"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center border border-white/20 bg-black/50 text-white/70 hover:bg-blue-500/20 hover:text-white hover:border-blue-500/50 transition-all rounded-full backdrop-blur-sm"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={18} />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/80"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center border border-white/20 bg-black/50 text-white/70 hover:bg-blue-500/20 hover:text-white hover:border-blue-500/50 transition-all rounded-full backdrop-blur-sm"
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={18} />
                 </button>
+
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setIndex(i)}
+                      className={`w-12 h-1 transition-all ${i === index ? "bg-blue-400" : "bg-white/20"}`}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Expo Content */}
-              <div className="grid grid-cols-1  text-[15px] sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-2 gap-6 text-sm 2xl:w-[80%]">
-                <div className="p-6 rounded-lg shadow-lg border bg-[#ffffff] ">
-                  <h3 className="text-lg font-bold font-serif">
-                    Expo Exhibitions
-                  </h3>
-                  <p className="mt-2  text-justify font-normal">
-                    At AH Denim, we actively participate in global trade shows
-                    to showcase our expertise in denim innovation and
-                    sustainable apparel manufacturing. Recently, we exhibited at
-                    Karachi TEXPO, one of Pakistan’s leading textile
-                    exhibitions. The event brought together industry leaders,
-                    buyers, and fashion brands from around the world to explore
-                    our latest collections and innovations.
-                  </p>
-                </div>
-                <div className="text-black p-6 rounded-lg shadow-lg border bg-[#ffffff]">
-                  <h3 className="text-lg  font-semibold font-serif">
-                    Our Presence at Karachi TEXPO
-                  </h3>
-                  <p className="mt-2  text-justify font-normal">
-                    At TEXPO Karachi, our booth attracted visitors from various
-                    countries, including top retailers, fashion designers, and
-                    sourcing professionals. We presented a range of sustainable
-                    denim solutions, highlighting eco-friendly washes and
-                    production techniques. Our team also showcased diverse woven
-                    garments for men, women, and kids, catering to different
-                    market needs.
-                  </p>
-                </div>
-                <div className="text-black p-6 rounded-lg shadow-lg border bg-[#ffffff]">
-                  <div className="flex  gap-4 items-center">
-                    <h3 className="text-lg font-semibold font-serif">
-                      Connecting with the Global Market
-                    </h3>
+              <div className="w-full lg:w-[45%] grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  {
+                    title: "Expo Exhibitions",
+                    desc: "At AH Denim, we actively participate in global trade shows to showcase our expertise in denim innovation and sustainable apparel manufacturing. Recently, we exhibited at Karachi TEXPO."
+                  },
+                  {
+                    title: "Karachi TEXPO",
+                    desc: "Our booth attracted visitors from various countries, including top retailers, fashion designers, and sourcing professionals. We presented a range of sustainable denim solutions."
+                  },
+                  {
+                    title: "Global Market",
+                    desc: "We introduced customization and low MOQ solutions, allowing buyers to order tailored styles with flexible quantities alongside our advanced washing capabilities."
+                  },
+                  {
+                    title: "Future Innovation",
+                    desc: "We look forward to unveiling more innovations at upcoming trade shows and continuing to push the boundaries of denim manufacturing. Experience the future of denim with AH Denim!"
+                  }
+                ].map((item, i) => (
+                  <div key={i} className="p-6 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors rounded-sm group relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <h3 className="text-[0.7rem] font-bold tracking-[0.15em] uppercase text-white/90 mb-3">{item.title}</h3>
+                    <p className="text-[0.7rem] text-white/40 leading-[1.8] font-light">{item.desc}</p>
                   </div>
-                  <p className="mt-2  text-justify font-normal ">
-                    We introduced customization and low MOQ solutions, allowing
-                    buyers to order tailored styles with flexible quantities.
-                    Additionally, our state-of-the-art laundry and finishing
-                    techniques were a key highlight, demonstrating our advanced
-                    washing capabilities. These innovations reinforced our
-                    commitment to high-quality denim manufacturing while
-                    prioritizing sustainability.
-                  </p>
-                </div>
-                <div className="text-black p-6 rounded-lg shadow-lg border bg-[#ffffff]">
-                  <h3 className="text-lg font-semibold  font-serif">
-                    Join Us at Future Exhibitions!
-                  </h3>
-                  <p className="mt-2  text-justify font-normal ">
-                    Participating in Karachi TEXPO strengthened our presence in
-                    the global denim industry and created opportunities for
-                    valuable networking. Engaging with international buyers and
-                    exploring new collaborations has been a key part of our
-                    growth strategy. We remain dedicated to trendsetting and
-                    fostering meaningful partnerships in the fashion sector.
-                  </p>
-                </div>
-
-                <div className="text-black p-6 rounded-lg shadow-lg border bg-[#ffffff]">
-                  <h3 className="text-lg font-semibold  font-serif">
-                    Future Showcases & Innovation
-                  </h3>
-                  <p className="mt-2  text-justify font-normal ">
-                    We look forward to unveiling more innovations at upcoming
-                    trade shows and continuing to push the boundaries of denim
-                    manufacturing. Stay tuned for updates on where you can visit
-                    us next. Experience the future of denim with AH Denim as we
-                    redefine sustainability, quality, and style!
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
-      </div>
+      </main>
 
       <Footer />
+      
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0.6; filter: blur(4px); }
+          to { opacity: 1; filter: blur(0); }
+        }
+      `}</style>
     </div>
   );
 };
