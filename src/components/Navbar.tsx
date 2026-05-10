@@ -69,14 +69,14 @@ const Navbar = () => {
             <div className="relative flex items-center gap-1 group">
               <span>Catalog</span>
               <RiArrowDownSLine size={16} className="mt-1" />
-              <div className="bg-[#ffffff] text-[#222222] py-4 px-2 w-[150px] rounded-lg shadow-lg flex flex-col items-center gap-3 absolute top-[3rem] left-[-45px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                <Link className="hover:scale-110" to="/Items?category=Man">
+              <div className="bg-[#030b13]/95 backdrop-blur-md border border-white/10 text-white py-4 px-2 w-[150px] rounded-sm shadow-xl flex flex-col items-center gap-3 absolute top-[3rem] left-[-45px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                <Link className="hover:text-blue-400 transition-colors text-[0.85rem] uppercase tracking-wider" to="/Items?category=Man">
                   Men
                 </Link>
-                <Link className="hover:scale-110 " to="/Items?category=Woman">
+                <Link className="hover:text-blue-400 transition-colors text-[0.85rem] uppercase tracking-wider" to="/Items?category=Woman">
                   Women
                 </Link>
-                <Link className="hover:scale-110" to="/Items?category=Kids">
+                <Link className="hover:text-blue-400 transition-colors text-[0.85rem] uppercase tracking-wider" to="/Items?category=Kids">
                   Kid
                 </Link>
               </div>
@@ -110,23 +110,23 @@ const Navbar = () => {
               <RiArrowDownSLine size={16} className="mt-1" />
             </button>
             <div
-              className={`overflow-hidden px-2 py-0 rounded-lg shadow-lg flex flex-col relative left-[7%] transition-all duration-300 ease-in-out text-white ${open ? "max-h-[150px] opacity-100 py-4" : "max-h-0 opacity-0"}`}
-              style={{ backgroundColor: "rgba(7,21,41,0.98)", border: "1px solid rgba(255,255,255,0.08)" }}
+              className={`overflow-hidden px-2 py-0 rounded-sm shadow-lg flex flex-col relative left-[7%] transition-all duration-300 ease-in-out text-white ${open ? "max-h-[150px] opacity-100 py-4 gap-2" : "max-h-0 opacity-0"}`}
+              style={{ backgroundColor: "rgba(3,11,19,0.95)", border: "1px solid rgba(255,255,255,0.05)" }}
             >
               <Link
-                className="hover:scale-110 block p-2"
+                className="hover:text-blue-400 transition-colors block p-2 text-[0.85rem] uppercase tracking-wider"
                 to="/Items?category=Man"
               >
                 Men
               </Link>
               <Link
-                className="hover:scale-110 block p-2"
+                className="hover:text-blue-400 transition-colors block p-2 text-[0.85rem] uppercase tracking-wider"
                 to="/Items?category=Woman"
               >
                 Women
               </Link>
               <Link
-                className="hover:scale-110 block p-2"
+                className="hover:text-blue-400 transition-colors block p-2 text-[0.85rem] uppercase tracking-wider"
                 to="/Items?category=Kids"
               >
                 Kid
