@@ -41,21 +41,18 @@ const VideoSection = () => {
   return (
     <section
       ref={ref}
+      className="flex flex-col lg:flex-row items-center w-full"
       style={{
         backgroundColor: '#030b13',
-        width: '100%',
         padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 6vw, 5rem) clamp(4rem, 8vw, 6rem)',
-        display: 'flex',
-        alignItems: 'center',
         gap: 'clamp(2rem, 6vw, 6rem)',
-        flexWrap: 'wrap'
       }}
     >
       {/* Left: Video */}
       <div
+        className="w-full lg:flex-1"
         style={{
-          flex: '1 1 50%',
-          minWidth: '300px',
+          minWidth: '280px',
           position: 'relative',
           borderRadius: '24px',
           overflow: 'hidden',
@@ -151,11 +148,8 @@ const VideoSection = () => {
 
       {/* Right: Text */}
       <div
+        className="w-full lg:w-[35%] flex flex-col justify-center"
         style={{
-          flex: '1 1 35%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateX(0)' : 'translateX(40px)',
           transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s',

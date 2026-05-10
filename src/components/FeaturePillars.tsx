@@ -154,12 +154,7 @@ const FeaturePillars = () => {
       ref={ref}
       style={{ backgroundColor: '#030b13', width: '100%' }}
     >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full">
         {PILLARS.map((p, i) => (
           <PillarCard key={i} {...p} index={i} visible={visible} />
         ))}

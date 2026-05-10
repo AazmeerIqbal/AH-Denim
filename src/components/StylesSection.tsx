@@ -278,10 +278,10 @@ const StylesSection = () => {
         </div>
 
         {/* CENTER */}
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '4vw', paddingTop: '1vh' }}>
+        <div className="flex-1 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-[4vw] pt-[1vh]">
 
           {/* Left text */}
-          <div style={{ flex: '0 0 auto', maxWidth: '55%' }}>
+          <div className="flex-none w-full lg:max-w-[55%]">
 
             {/* Ghost number */}
             <div
@@ -379,13 +379,14 @@ const StylesSection = () => {
           </div>
 
           {/* Right thumbnail strip */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: '280px', marginLeft: 'auto' }}>
+          <div className="flex lg:flex-1 flex-row lg:flex-col gap-3 max-w-full lg:max-w-[280px] lg:ml-auto overflow-x-auto pb-2 lg:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {STYLES.map((style, i) => {
               const isCurrent = i === active;
               return (
                 <button
                   key={i}
                   onClick={() => goTo(i)}
+                  className="flex-shrink-0"
                   style={{
                     display: 'flex', alignItems: 'center', gap: '0.75rem',
                     background: 'none', border: 'none', cursor: 'pointer',

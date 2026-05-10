@@ -169,22 +169,12 @@ const FactorySection = () => {
 
       {/* ── Content row ── */}
       <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          flex: 1,
-          display: 'flex',
-          alignItems: 'stretch',
-        }}
+        className="relative z-10 flex-1 flex flex-col md:flex-row items-stretch w-full"
       >
         {/* LEFT: Text + CTA */}
         <div
+          className="w-full md:w-[clamp(280px,48%,560px)] flex-shrink-0 flex flex-col justify-center"
           style={{
-            flex: '0 0 auto',
-            width: 'clamp(280px, 48%, 560px)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
             padding: 'clamp(2.5rem, 6vw, 5rem) clamp(2rem, 6vw, 5rem)',
             opacity: visible ? 1 : 0,
             transform: visible ? 'translateY(0)' : 'translateY(36px)',
@@ -305,15 +295,13 @@ const FactorySection = () => {
           </button>
         </div>
 
-        {/* ── Vertical divider ── */}
+        {/* ── Divider (horizontal on mobile, vertical on desktop) ── */}
         <div
+          className="w-full h-[1px] md:w-[1px] md:h-auto self-stretch flex-shrink-0"
           style={{
-            width: '1px',
-            alignSelf: 'stretch',
-            margin: 'clamp(2rem, 4vw, 3.5rem) 0',
+            margin: 'clamp(1rem, 4vw, 3.5rem) 0',
             background:
-              'linear-gradient(to bottom, transparent, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.1) 75%, transparent)',
-            flexShrink: 0,
+              'linear-gradient(to bottom right, transparent, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.1) 75%, transparent)',
             opacity: visible ? 1 : 0,
             transition: 'opacity 0.8s ease 0.5s',
           }}
@@ -321,11 +309,8 @@ const FactorySection = () => {
 
         {/* RIGHT: Stats */}
         <div
+          className="flex-1 flex flex-col justify-center"
           style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
             padding: 'clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4.5rem)',
           }}
         >

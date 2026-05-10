@@ -70,9 +70,9 @@ const Hero = () => {
         This eliminates the rectangular halo artifact entirely.
       */}
       <div
-        className="absolute bottom-0 left-0 z-10 pointer-events-none flex items-end"
+        className="absolute bottom-0 left-0 z-10 pointer-events-none flex items-end max-md:opacity-40"
         style={{
-          width: "clamp(220px, 33vw, 520px)",
+          width: "clamp(140px, 33vw, 520px)",
           height: "92%",
           transform: `translateY(${scrollY * 0.05}px)`,
         }}
@@ -98,9 +98,9 @@ const Hero = () => {
 
       {/* ── RIGHT MANNEQUIN ── */}
       <div
-        className="absolute bottom-0 right-0 z-10 pointer-events-none flex items-end"
+        className="absolute bottom-0 right-0 z-10 pointer-events-none flex items-end max-md:opacity-40"
         style={{
-          width: "clamp(220px, 33vw, 520px)",
+          width: "clamp(140px, 33vw, 520px)",
           height: "92%",
           transform: `translateY(${scrollY * 0.05}px)`,
         }}
@@ -158,7 +158,7 @@ const Hero = () => {
             className="uppercase font-black leading-[0.88] mb-6 select-none"
             style={{
               fontFamily: "'Arial Black', Impact, sans-serif",
-              fontSize: "clamp(3rem, 8.5vw, 8rem)",
+              fontSize: "clamp(2.5rem, 8.5vw, 8rem)",
               letterSpacing: "-0.025em",
               ...anim(0.45),
             }}

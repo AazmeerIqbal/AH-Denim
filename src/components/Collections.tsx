@@ -148,24 +148,18 @@ const Collections = () => {
   return (
     <section
       ref={ref}
+      className="flex flex-col md:flex-row items-stretch w-full"
       style={{
         backgroundColor: '#030b13',
         background:
           'radial-gradient(ellipse 70% 60% at 80% 50%, #0d2147 0%, #030b13 65%)',
-        width: '100%',
-        display: 'flex',
-        alignItems: 'stretch',
         minHeight: '520px',
       }}
     >
       {/* Left text block */}
       <div
+        className="w-full md:w-[clamp(220px,26%,320px)] flex-shrink-0 flex flex-col justify-center"
         style={{
-          width: 'clamp(220px, 26%, 320px)',
-          flexShrink: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
           padding: 'clamp(2rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem)',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateX(0)' : 'translateX(-40px)',
@@ -234,7 +228,7 @@ const Collections = () => {
       </div>
 
       {/* Cards strip */}
-      <div style={{ flex: 1, display: 'flex', gap: '1px', overflow: 'hidden' }}>
+      <div className="flex-1 flex flex-col md:flex-row gap-[1px] overflow-hidden">
         {COLLECTIONS.map((col, i) => (
           <CollectionCard key={i} {...col} index={i} visible={visible} />
         ))}

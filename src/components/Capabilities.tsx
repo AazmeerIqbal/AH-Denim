@@ -80,18 +80,16 @@ const Capabilities = () => {
     >
       {/* Top row: left text + right items */}
       <div
+        className="flex flex-col lg:flex-row items-start"
         style={{
-          display: 'flex',
           gap: 'clamp(2rem, 5vw, 5rem)',
-          alignItems: 'flex-start',
           marginBottom: 'clamp(2.5rem, 4vw, 3.5rem)',
         }}
       >
         {/* Left */}
         <div
+          className="w-full lg:w-[clamp(240px,30%,360px)] flex-shrink-0"
           style={{
-            flex: '0 0 auto',
-            width: 'clamp(240px, 30%, 360px)',
             opacity: visible ? 1 : 0,
             transform: visible ? 'translateY(0)' : 'translateY(32px)',
             transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s',
@@ -170,12 +168,10 @@ const Capabilities = () => {
           </Link>
         </div>
 
-        {/* Right: 6 icons in 2×3 grid */}
+        {/* Right: 6 icons in grid */}
         <div
+          className="flex-1 grid grid-cols-2 md:grid-cols-3 w-full"
           style={{
-            flex: 1,
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem)',
             alignContent: 'center',
           }}
