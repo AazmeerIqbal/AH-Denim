@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import FeaturePillars from "../components/FeaturePillars";
+// import FeaturePillars from "../components/FeaturePillars";
+import OurWork from "../components/OurWork";
 import Collections from "../components/Collections";
 import Capabilities from "../components/Capabilities";
 import VideoSection from "../components/VideoSection";
@@ -15,7 +16,8 @@ const Home = () => {
       <Navbar />
       <main>
         <Hero />
-        <FeaturePillars />
+        <OurWork />
+        {/* <FeaturePillars /> */}
         <Collections />
         <Capabilities />
         <VideoSection />

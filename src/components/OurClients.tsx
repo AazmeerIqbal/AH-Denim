@@ -1,5 +1,4 @@
 import { useScrollReveal } from "../hooks/useScrollReveal";
-import Buyers from "/images/Buyers.jpeg";
 import Client1 from "/images/Client1.jpg";
 import Client2 from "/images/Client2.jpeg";
 import Client3 from "/images/Client3.jpeg";
@@ -30,7 +29,7 @@ const OurClients = () => {
       ref={ref}
       style={{
         backgroundColor: '#030b13',
-        padding: 'clamp(3rem, 6vw, 5.5rem) 0',
+        padding: 'clamp(4rem, 8vw, 8rem) 0',
         borderTop: '1px solid rgba(255,255,255,0.05)',
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(32px)',
@@ -51,41 +50,50 @@ const OurClients = () => {
             We are proud to work with established brands and fashion startups globally. 
             Our objective is to leverage our industry knowledge and expertise to create value for our clients.
           </p>
+          <div
+            className="h-px mx-auto mt-8"
+            style={{
+              width: "60px",
+              background: "linear-gradient(to right, transparent, rgba(147,197,253,0.4), transparent)",
+            }}
+          />
         </div>
-      </div>
 
-      {/* Infinite Slider */}
-      <div className="relative w-full flex overflow-hidden group">
-        {/* Left and Right Fade overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-[15%] bg-gradient-to-r from-[#030b13] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-[15%] bg-gradient-to-l from-[#030b13] to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex animate-scroll hover:[animation-play-state:paused] w-max gap-8 items-center py-4">
-          {/* Double the array for seamless looping */}
-          {[...clients, ...clients].map((client, index) => (
+        {/* Client Grid */}
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:gap-8 px-4 lg:px-0">
+          {clients.map((client, index) => (
             <div 
               key={index}
-              className="w-24 sm:w-28 md:w-36 aspect-square rounded-sm border border-white/10 bg-white/[0.02] flex items-center justify-center p-4 filter grayscale contrast-125 opacity-60 hover:grayscale-0 hover:opacity-100 hover:border-blue-500/50 transition-all duration-500 flex-shrink-0"
+              className="group relative w-full aspect-[4/3] rounded-sm flex items-center justify-center p-6 sm:p-8 transition-all duration-500 overflow-hidden cursor-pointer"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.02)",
+                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.05)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
+                e.currentTarget.style.boxShadow = "inset 0 0 0 1px rgba(147,197,253,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.02)";
+                e.currentTarget.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
+              }}
             >
               <img
                 src={client}
                 alt={`Client ${index + 1}`}
-                className="max-w-full max-h-full object-contain mix-blend-screen"
+                className="w-full h-full object-contain filter grayscale contrast-125 opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:contrast-100 transition-all duration-500 transform group-hover:scale-110 mix-blend-screen"
+              />
+              {/* Subtle hover glow behind image */}
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.1) 0%, transparent 60%)",
+                }}
               />
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-50% - 1rem)); } /* -50% shifts halfway through the doubled list */
-        }
-        .animate-scroll {
-          animation: scroll 40s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };
