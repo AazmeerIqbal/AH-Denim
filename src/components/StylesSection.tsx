@@ -143,7 +143,6 @@ const StylesSection = () => {
         position: 'sticky',
         top: 0,
         height: '100vh',
-        minHeight: '600px',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
@@ -225,7 +224,7 @@ const StylesSection = () => {
         style={{
           position: 'relative', zIndex: 10, height: '100%',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          padding: 'clamp(1.5rem,4vh,3rem) clamp(1.5rem,5vw,5rem)',
+          padding: 'clamp(1rem,3vh,3rem) clamp(1.5rem,5vw,5rem)',
           opacity: sectionVisible ? 1 : 0,
           transform: sectionVisible ? 'translateY(0)' : 'translateY(40px)',
           transition: 'opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s',
@@ -288,13 +287,13 @@ const StylesSection = () => {
               key={`num-${active}`}
               style={{
                 fontFamily: "'Arial Black', Impact, sans-serif",
-                fontSize: 'clamp(7rem, 18vw, 18rem)',
+                fontSize: 'clamp(5rem, 15vh, 16rem)',
                 fontWeight: 900,
                 color: 'transparent',
                 WebkitTextStroke: `1px ${current.accent.replace('0.85', '0.1')}`,
-                lineHeight: 1, userSelect: 'none',
+                lineHeight: 0.85, userSelect: 'none',
                 letterSpacing: '-0.04em',
-                marginBottom: '-2rem',
+                marginBottom: 'clamp(-3rem, -4vh, -1rem)',
                 animation: 'numSlideIn 0.8s cubic-bezier(0.22,1,0.36,1) forwards',
                 opacity: 0,
               }}
@@ -305,10 +304,10 @@ const StylesSection = () => {
             {/* Sublabel pill */}
             <div
               key={`pill-${active}`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem', animation: 'fadeUp 0.7s ease 0.15s forwards', opacity: 0 }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: 'clamp(0.5rem, 1.5vh, 1rem)', animation: 'fadeUp 0.7s ease 0.15s forwards', opacity: 0 }}
             >
               <div style={{ width: '28px', height: '1px', background: current.accent }} />
-              <span style={{ color: current.accent, fontSize: '0.65rem', letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 600 }}>
+              <span style={{ color: current.accent, fontSize: 'clamp(0.55rem, 1.2vh, 0.65rem)', letterSpacing: '0.35em', textTransform: 'uppercase', fontWeight: 600 }}>
                 {current.sublabel}
               </span>
             </div>
@@ -319,12 +318,12 @@ const StylesSection = () => {
               style={{
                 fontFamily: "'Arial Black', Impact, sans-serif",
                 fontWeight: 900,
-                fontSize: 'clamp(2.4rem, 5.5vw, 5.5rem)',
+                fontSize: 'clamp(2rem, 7vh, 5rem)',
                 color: '#ffffff',
                 textTransform: 'uppercase',
                 lineHeight: 0.95,
                 letterSpacing: '-0.03em',
-                marginBottom: '1.5rem',
+                marginBottom: 'clamp(0.75rem, 2vh, 1.5rem)',
                 animation: 'fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s forwards',
                 opacity: 0,
               }}
@@ -337,10 +336,10 @@ const StylesSection = () => {
               key={`desc-${active}`}
               style={{
                 color: 'rgba(255,255,255,0.5)',
-                fontSize: 'clamp(0.8rem, 1.1vw, 1rem)',
-                fontWeight: 300, lineHeight: 1.85,
+                fontSize: 'clamp(0.75rem, 1.5vh, 1rem)',
+                fontWeight: 300, lineHeight: 1.7,
                 letterSpacing: '0.03em',
-                maxWidth: '420px', marginBottom: '2.5rem',
+                maxWidth: '420px', marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
                 animation: 'fadeUp 0.8s ease 0.35s forwards', opacity: 0,
               }}
             >

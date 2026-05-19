@@ -7,6 +7,7 @@ import Capabilities from "../components/Capabilities";
 import VideoSection from "../components/VideoSection";
 import StylesSection from "../components/StylesSection";
 import FactorySection from "../components/FactorySection";
+import WorldAndUs from "../components/WorldAndUs";
 import OurClients from "../components/OurClients";
 import Footer from "../components/Footer";
 
@@ -23,6 +24,7 @@ const Home = () => {
         <VideoSection />
         <StylesSection />
         <FactorySection />
+        <WorldAndUs />
         <OurClients />
       </main>
       <Footer />

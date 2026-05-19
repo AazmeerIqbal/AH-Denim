@@ -6,19 +6,19 @@ const COLLECTIONS = [
   {
     category: 'Men',
     tagline: 'Timeless. Versatile.\nBuilt to perform.',
-    image: '/images/men.png',
+    image: '/images/men2.png',
     link: '/Items?category=Man',
   },
   {
     category: 'Women',
     tagline: 'Confident. Contemporary.\nDesigned to empower.',
-    image: '/images/women.png',
+    image: '/images/women2.png',
     link: '/Items?category=Woman',
   },
   {
     category: 'Kids',
     tagline: 'Comfort. Quality.\nMade for movement.',
-    image: '/images/kid.png',
+    image: '/images/kid2.png',
     link: '/Items?category=Kids',
   },
 ];
