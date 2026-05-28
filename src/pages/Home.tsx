@@ -10,6 +10,7 @@ import FactorySection from "../components/FactorySection";
 import WorldAndUs from "../components/WorldAndUs";
 import OurClients from "../components/OurClients";
 import Footer from "../components/Footer";
+// import FeaturePillars from "../components/FeaturePillars";
 // import WheelSection from "../components/Wheelsection";
 
 const Home = () => {

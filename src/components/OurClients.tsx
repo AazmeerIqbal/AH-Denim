@@ -1,101 +1,235 @@
-import { useScrollReveal } from "../hooks/useScrollReveal";
-import Client1 from "/images/Clients/Client1.jpg";
-import Client2 from "/images/Clients/Client2.jpeg";
-import Client3 from "/images/Clients/Client3.jpeg";
-import Client4 from "/images/Clients/Client4.jpeg";
-import Client5 from "/images/Clients/Client5.jpeg";
-import Client6 from "/images/Clients/Client6.jpg";
-import Client7 from "/images/Clients/Client7.jpeg";
-import Client8 from "/images/Clients/Client8.jpeg";
-import Client9 from "/images/Clients/Client9.jpeg";
-import Client10 from "/images/Clients/Client10.jpeg";
-import Client11 from "/images/Clients/Client11.jpeg";
-import Client12 from "/images/Clients/Client12.jpeg";
-import Client13 from "/images/Clients/Client13.jpeg";
-import Client14 from "/images/Clients/Client14.png";
-import Client15 from "/images/Clients/Client15.jpg";
+import { useRef, useEffect, useState } from "react";
 
-const clients = [
-  Client1, Client2, Client3, Client4, Client5,
-  Client6, Client7, Client8, Client9, Client10,
-  Client11, Client12, Client13, Client14, Client15
+import Client1 from "/images/Clients/bohoo_group.png";
+import Client2 from "/images/Clients/d4denim.png";
+import Client3 from "/images/Clients/lvd.png";
+import Client4 from "/images/Clients/B Couture.png";
+import Client5 from "/images/Clients/disaster.png";
+import Client6 from "/images/Clients/prettylittlethings.png";
+import Client7 from "/images/Clients/aris.jpeg";
+import Client8 from "/images/Clients/prohibited.png";
+import Client9 from "/images/Clients/threadbare.jpg";
+import Client10 from "/images/Clients/rivr.jpeg";
+import Client11 from "/images/Clients/crosshatch.png";
+import Client12 from "/images/Clients/wampum.png";
+import Client13 from "/images/Clients/baggys.png";
+
+// bg: "white" = pure white bg, "black" = pure black bg, "none" = transparent
+const LOGOS = [
+  // Row 1 — hero, centered
+  { src: Client1, alt: "Boohoo Group", size: "hero", bg: "white" },
+
+  // Row 2 — 4 logos
+  { src: Client6, alt: "Pretty Little Thing", size: "large", bg: "black" },
+  { src: Client2, alt: "D4 Denim", size: "large", bg: "white" },
+  { src: Client3, alt: "LVD", size: "large", bg: "none" },
+  { src: Client11, alt: "Crosshatch", size: "large", bg: "black" },
+
+  // Row 3 — 5 logos
+  { src: Client5, alt: "Disaster", size: "medium", bg: "none" },
+  { src: Client4, alt: "B Couture", size: "medium", bg: "none" },
+  { src: Client8, alt: "Prohibited", size: "medium", bg: "none" },
+  { src: Client9, alt: "Threadbare", size: "medium", bg: "black" },
+  { src: Client7, alt: "Aris", size: "medium", bg: "white" },
+
+  // Row 4 — 3 logos centered
+  { src: Client12, alt: "Wampum", size: "medium", bg: "white" },
+  { src: Client10, alt: "Rivr", size: "medium", bg: "black" },
+  { src: Client13, alt: "Baggys", size: "medium", bg: "none" },
 ];
 
-const OurClients = () => {
-  const { ref, visible } = useScrollReveal(0.1);
+const ROWS = [
+  [0],           // hero
+  [1, 2, 3, 4],  // row 2
+  [5, 6, 7, 8, 9], // row 3
+  [10, 11, 12],  // row 4
+];
+
+const SIZES = {
+  hero: { w: 320, h: 100 },
+  large: { w: 200, h: 68 },
+  medium: { w: 170, h: 60 },
+};
+
+function getMultiplier(w: number) {
+  if (w < 480) return 0.42;
+  if (w < 640) return 0.55;
+  if (w < 900) return 0.70;
+  if (w < 1200) return 0.85;
+  return 1;
+}
+
+export default function OurClients() {
+  const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [mult, setMult] = useState(1);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold: 0.06 }
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const update = () => setMult(getMultiplier(window.innerWidth));
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const anim = (delay: number): React.CSSProperties => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(24px)",
+    transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
+  });
+
+  let globalIndex = 0;
 
   return (
     <section
       ref={ref}
       style={{
-        backgroundColor: '#030b13',
-        padding: 'clamp(4rem, 8vw, 8rem) 0',
-        borderTop: '1px solid rgba(255,255,255,0.05)',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(32px)',
-        transition: 'opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s',
+        backgroundColor: "#030b13",
+        padding: "clamp(4rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 6rem)",
+        borderTop: "1px solid rgba(255,255,255,0.04)",
+        position: "relative",
+        overflow: "hidden",
       }}
-      className="overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center">
-        {/* Header */}
-        <div className="text-center mb-16 max-w-3xl">
-          <p className="text-blue-300/65 text-[0.6rem] font-semibold tracking-[0.3em] uppercase mb-4">
-            Trusted Partners
-          </p>
-          <h2 className="font-['Arial_Black',Impact,sans-serif] font-black text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.0] tracking-[-0.02em] mb-6 text-white/90">
-            Our Clients
+      {/* Radial glow */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(ellipse 65% 55% at 50% 52%, rgba(13,33,71,0.5) 0%, transparent 65%)",
+      }} />
+
+      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(1rem, 3vw, 2.5rem)", position: "relative", zIndex: 1 }}>
+
+        {/* HEADER */}
+        <div style={{ ...anim(0), textAlign: "center", marginBottom: "clamp(2.5rem, 5vw, 4rem)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", marginBottom: "0.9rem" }}>
+            <div style={{ width: 28, height: 1, background: "rgba(147,197,253,0.4)" }} />
+            <span style={{ color: "rgba(147,197,253,0.6)", fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.32em", textTransform: "uppercase" }}>
+              Trusted Partners
+            </span>
+            <div style={{ width: 28, height: 1, background: "rgba(147,197,253,0.4)" }} />
+          </div>
+          <h2 style={{
+            fontFamily: "'Arial Black', Impact, sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(2rem, 4vw, 3.5rem)",
+            textTransform: "uppercase",
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+            color: "#fff",
+            margin: "0 0 0.7rem",
+          }}>
+            Our{" "}
+            <span style={{ WebkitTextStroke: "1px rgba(255,255,255,0.28)", color: "transparent" }}>
+              Clients
+            </span>
           </h2>
-          <p className="text-[0.8rem] text-white/50 font-light leading-[1.8] tracking-[0.03em]">
-            We are proud to work with established brands and fashion startups globally.
-            Our objective is to leverage our industry knowledge and expertise to create value for our clients.
+          <p style={{
+            ...anim(0.1),
+            color: "rgba(255,255,255,0.32)",
+            fontSize: "0.82rem", fontWeight: 300,
+            lineHeight: 1.8, letterSpacing: "0.03em",
+            maxWidth: 460, margin: "0 auto 1.1rem",
+          }}>
+            Proud to partner with leading global fashion brands and pioneering
+            startups — delivering quality denim at every scale.
           </p>
-          <div
-            className="h-px mx-auto mt-8"
-            style={{
-              width: "60px",
-              background: "linear-gradient(to right, transparent, rgba(147,197,253,0.4), transparent)",
-            }}
-          />
+          <div style={{ width: 48, height: 1, margin: "0 auto", background: "linear-gradient(90deg, transparent, rgba(147,197,253,0.35), transparent)" }} />
         </div>
 
-        {/* Client Grid */}
-        <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:gap-8 px-4 lg:px-0">
-          {clients.map((client, index) => (
-            <div
-              key={index}
-              className="group relative w-full aspect-[4/3] rounded-sm flex items-center justify-center p-6 sm:p-8 transition-all duration-500 overflow-hidden cursor-pointer"
-              style={{
-                backgroundColor: "rgba(255,255,255,0.02)",
-                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.05)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
-                e.currentTarget.style.boxShadow = "inset 0 0 0 1px rgba(147,197,253,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.02)";
-                e.currentTarget.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
-              }}
-            >
-              <img
-                src={client}
-                alt={`Client ${index + 1}`}
-                className="w-full h-full object-contain filter grayscale contrast-125 opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:contrast-100 transition-all duration-500 transform group-hover:scale-110 mix-blend-screen"
-              />
-              {/* Subtle hover glow behind image */}
+        {/* LOGO ROWS */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: `${28 * mult}px` }}>
+          {ROWS.map((row, rowIdx) => {
+            const rowDelay = 0.15 + rowIdx * 0.1;
+            return (
               <div
-                className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                key={rowIdx}
                 style={{
-                  background: "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.1) 0%, transparent 60%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: `${24 * mult}px`,
+                  flexWrap: "wrap",
                 }}
-              />
-            </div>
-          ))}
+              >
+                {row.map((logoIdx) => {
+                  const logo = LOGOS[logoIdx];
+                  const size = SIZES[logo.size as keyof typeof SIZES];
+                  const w = size.w * mult;
+                  const h = size.h * mult;
+                  const itemDelay = rowDelay + (row.indexOf(logoIdx) * 0.06);
+
+                  const bgStyle: React.CSSProperties =
+                    logo.bg === "white"
+                      ? { backgroundColor: "#ffffff", borderRadius: 4 }
+                      : logo.bg === "black"
+                        ? { backgroundColor: "#111111", borderRadius: 4 }
+                        : {};
+
+                  return (
+                    <div
+                      key={logoIdx}
+                      style={{
+                        ...anim(itemDelay),
+                        width: w,
+                        height: h,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: logo.bg !== "none" ? `${8 * mult}px ${14 * mult}px` : "0",
+                        cursor: "pointer",
+                        transition: `opacity 0.8s ease ${itemDelay}s, transform 0.8s ease ${itemDelay}s, box-shadow 0.3s ease`,
+                        ...bgStyle,
+                      }}
+                      onMouseEnter={e => {
+                        const el = e.currentTarget as HTMLDivElement;
+                        el.style.transform = "translateY(-3px) scale(1.06)";
+                        if (logo.bg !== "none") {
+                          el.style.boxShadow = logo.bg === "white"
+                            ? "0 8px 24px rgba(255,255,255,0.15)"
+                            : "0 8px 24px rgba(0,0,0,0.5)";
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        const el = e.currentTarget as HTMLDivElement;
+                        el.style.transform = "translateY(0) scale(1)";
+                        el.style.boxShadow = "none";
+                      }}
+                    >
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                          userSelect: "none",
+                          pointerEvents: "none",
+                          mixBlendMode: logo.bg === "none" ? "screen" : "normal",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* BOTTOM TAGLINE */}
+        <div style={{ ...anim(0.9), textAlign: "center", marginTop: "clamp(2rem, 4vw, 3rem)" }}>
+          <p style={{ color: "rgba(255,255,255,0.12)", fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 300 }}>
+            13+ Global Fashion Brands & Growing
+          </p>
         </div>
       </div>
     </section>
   );
-};
-
-export default OurClients;
+}
