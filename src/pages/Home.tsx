@@ -10,6 +10,7 @@ import FactorySection from "../components/FactorySection";
 import WorldAndUs from "../components/WorldAndUs";
 import OurClients from "../components/OurClients";
 import Footer from "../components/Footer";
+// import WheelSection from "../components/Wheelsection";
 
 const Home = () => {
   return (
@@ -18,11 +19,12 @@ const Home = () => {
       <main>
         <Hero />
         <OurWork />
+        {/* <WheelSection /> */}
         {/* <FeaturePillars /> */}
         <Collections />
         <Capabilities />
-        <VideoSection />
         <StylesSection />
+        <VideoSection />
         <FactorySection />
         <WorldAndUs />
         <OurClients />

@@ -408,7 +408,7 @@ const OurWork = () => {
       </div>
 
       {/* ── STATS ROW — full width ── */}
-      <div
+      {/* <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
@@ -473,7 +473,7 @@ const OurWork = () => {
             </span>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <style>{`
         @media (max-width: 900px) {

@@ -40,6 +40,7 @@ const VideoSection = () => {
 
   return (
     <section
+      id="video-section"
       ref={ref}
       className="flex flex-col lg:flex-row items-center w-full"
       style={{

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import { useEffect, useRef, useState } from "react";
 import mannequinImage from "/images/Group 2.png";
 import mannequinImage2 from "/images/Group 3.png";
@@ -209,38 +209,40 @@ const Hero = () => {
 
           {/* Circular CTA */}
           <div style={anim(0.88)}>
-            <Link to="/Items?category=Man">
-              <button
-                className="group relative w-[76px] h-[76px] rounded-full flex flex-col items-center justify-center text-white transition-all duration-500"
+            <button
+              onClick={() => {
+                const el = document.getElementById('video-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="group relative w-[76px] h-[76px] rounded-full flex flex-col items-center justify-center text-white transition-all duration-500"
+              style={{
+                border: "1px solid rgba(255,255,255,0.18)",
+                background: "rgba(255,255,255,0.03)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              <span
+                className="absolute inset-[-4px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
-                  border: "1px solid rgba(255,255,255,0.18)",
-                  background: "rgba(255,255,255,0.03)",
-                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 0 24px rgba(59,130,246,0.3)",
+                  border: "1px solid rgba(59,130,246,0.35)",
                 }}
+              />
+              <span
+                className="text-[8px] tracking-[0.25em] uppercase font-semibold relative z-10"
+                style={{ color: "rgba(255,255,255,0.8)" }}
               >
-                <span
-                  className="absolute inset-[-4px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    boxShadow: "0 0 24px rgba(59,130,246,0.3)",
-                    border: "1px solid rgba(59,130,246,0.35)",
-                  }}
-                />
-                <span
-                  className="text-[8px] tracking-[0.25em] uppercase font-semibold relative z-10"
-                  style={{ color: "rgba(255,255,255,0.8)" }}
-                >
-                  Explore
-                </span>
-                <svg
-                  className="w-3 h-3 mt-[5px] relative z-10 group-hover:translate-y-0.5 transition-transform duration-300"
-                  fill="none"
-                  stroke="rgba(255,255,255,0.65)"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            </Link>
+                Explore
+              </span>
+              <svg
+                className="w-3 h-3 mt-[5px] relative z-10 group-hover:translate-y-0.5 transition-transform duration-300"
+                fill="none"
+                stroke="rgba(255,255,255,0.65)"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
           </div>
         </div>
 
