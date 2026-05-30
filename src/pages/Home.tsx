@@ -23,7 +23,7 @@ const Home = () => {
         {/* <WheelSection /> */}
         {/* <FeaturePillars /> */}
         <Collections />
-        <Capabilities />
+        {/* <Capabilities /> */}
         <StylesSection />
         <VideoSection />
         <FactorySection />

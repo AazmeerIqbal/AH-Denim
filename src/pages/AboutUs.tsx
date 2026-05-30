@@ -8,7 +8,7 @@ import ExpoImage3 from "/images/ExpoImage3.jpeg";
 import ExpoImage4 from "/images/ExpoImage4.jpeg";
 import ExpoImage5 from "/images/ExpoImage5.jpeg";
 import ExpoImage6 from "/images/ExpoImage6.jpeg";
-import ExpoImage7 from "/images/ExpoImage7.jpeg";
+// import ExpoImage7 from "/images/ExpoImage7.jpeg";
 import ExpoImage8 from "/images/ExpoImage8.jpeg";
 
 import { useState, useEffect } from "react";
@@ -25,7 +25,7 @@ const images = [
   ExpoImage4,
   ExpoImage5,
   ExpoImage6,
-  ExpoImage7,
+  // ExpoImage7,
   ExpoImage8,
 ];
 
@@ -86,12 +86,12 @@ const AboutUs = () => {
               <h2 className="font-['Arial_Black',Impact,sans-serif] font-black text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.0] tracking-[-0.02em] mb-6">
                 Legacy of<br />Excellence
               </h2>
-              
+
               <div className="space-y-6 text-[0.8rem] text-white/50 font-light leading-[1.8] tracking-[0.03em]">
                 <p>
                   <strong className="text-white/80 font-semibold tracking-wider">FOUNDED IN 2000</strong> — AH Denim has grown into a leading cut-to-pack manufacturer, specializing in denim and woven garments for men, women, and kids. With two state-of-the-art manufacturing units and a monthly production capacity of 150,000 garments, we provide end-to-end solutions—from design development to final packaging, all under one roof.
                 </p>
-                
+
                 <div className="border-l border-blue-400/20 pl-6 py-2 space-y-4">
                   <p>
                     <strong className="text-blue-300/80 uppercase text-[0.7rem] tracking-wider block mb-1">Cut-to-Pack Solutions</strong>
@@ -108,7 +108,7 @@ const AboutUs = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="w-full lg:w-1/2 relative group">
               <div className="absolute inset-0 bg-blue-500/10 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-full" />
               <img
@@ -136,8 +136,8 @@ const AboutUs = () => {
         >
           <div className="max-w-[95%] mx-auto relative border border-white/10 rounded-sm overflow-hidden bg-black/50">
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(3,11,19,0.8)_100%)] z-10" />
-            <video 
-              className="w-full h-[40vh] md:h-[65vh] object-cover opacity-80 mix-blend-screen" 
+            <video
+              className="w-full h-[40vh] md:h-[65vh] object-cover opacity-80 mix-blend-screen"
               controls
               poster={AboutUsImage}
             >
@@ -161,7 +161,7 @@ const AboutUs = () => {
             <h2 className="text-center font-['Arial_Black',Impact,sans-serif] text-[clamp(1.5rem,3vw,2.5rem)] uppercase tracking-[-0.02em] mb-16 text-white/90">
               Overview
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 divide-y md:divide-y-0 md:divide-x divide-white/10">
               {[
                 { label: "Monthly Capacity", end: 400000, suffix: "+", desc: "Garments produced per month with continuous growth" },
@@ -218,7 +218,7 @@ const AboutUs = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#030b13] via-transparent to-transparent opacity-80" />
                 </div>
-                
+
                 <button
                   onClick={prevSlide}
                   className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center border border-white/20 bg-black/50 text-white/70 hover:bg-blue-500/20 hover:text-white hover:border-blue-500/50 transition-all rounded-full backdrop-blur-sm"
@@ -276,7 +276,7 @@ const AboutUs = () => {
       </main>
 
       <Footer />
-      
+
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0.6; filter: blur(4px); }

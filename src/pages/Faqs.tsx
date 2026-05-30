@@ -11,11 +11,7 @@ const faqData = [
   },
   {
     question: "Do you offer low MOQ or no minimum order quantity?",
-    answer: "Yes! We offer low MOQ for fashion-forward styles and even no minimum order quantity for select designs, making it easier for startups and small brands to bring their vision to life",
-  },
-  {
-    question: "Can you develop custom fabrics and washes?",
-    answer: "Absolutely! We provide custom fabric development and an extensive range of sustainable wash techniques, including laser distressing, ozone washing, and enzyme washes.",
+    answer: "Yes! We offer low MOQ for fashion-forward styles and a minimum of 800 pieces for select designs, making it easier for startups and small brands to bring their vision to life",
   },
   {
     question: "What sustainability practices do you follow?",
@@ -88,19 +84,16 @@ const Faqs = () => {
                 <div
                   key={index}
                   onClick={() => handleExpand(index)}
-                  className={`border border-white/10 rounded-sm overflow-hidden cursor-pointer transition-all duration-300 ${
-                    isExpanded ? "bg-white/[0.04] border-blue-500/30" : "bg-black/20 hover:bg-white/[0.02]"
-                  }`}
+                  className={`border border-white/10 rounded-sm overflow-hidden cursor-pointer transition-all duration-300 ${isExpanded ? "bg-white/[0.04] border-blue-500/30" : "bg-black/20 hover:bg-white/[0.02]"
+                    }`}
                 >
                   <div className="px-6 py-5 flex justify-between items-center gap-4">
-                    <h3 className={`text-[0.85rem] tracking-[0.05em] uppercase font-bold transition-colors duration-300 ${
-                      isExpanded ? "text-blue-300/90" : "text-white/80"
-                    }`}>
+                    <h3 className={`text-[0.85rem] tracking-[0.05em] uppercase font-bold transition-colors duration-300 ${isExpanded ? "text-blue-300/90" : "text-white/80"
+                      }`}>
                       {item.question}
                     </h3>
-                    <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${
-                      isExpanded ? "border-blue-500/50 bg-blue-500/10 text-blue-300" : "border-white/10 text-white/50"
-                    }`}>
+                    <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-300 ${isExpanded ? "border-blue-500/50 bg-blue-500/10 text-blue-300" : "border-white/10 text-white/50"
+                      }`}>
                       <ChevronDown
                         size={16}
                         className={`transition-transform duration-500 ${isExpanded ? "rotate-180" : "rotate-0"}`}
@@ -109,9 +102,8 @@ const Faqs = () => {
                   </div>
 
                   <div
-                    className={`transition-all duration-500 ease-in-out ${
-                      isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                    }`}
+                    className={`transition-all duration-500 ease-in-out ${isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                      }`}
                   >
                     <div className="px-6 pb-6 pt-0 text-[0.8rem] text-white/50 font-light leading-[1.8] tracking-[0.03em]">
                       {item.answer}

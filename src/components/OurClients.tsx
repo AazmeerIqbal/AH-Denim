@@ -20,10 +20,10 @@ const LOGOS = [
   { src: Client1, alt: "Boohoo Group", size: "hero", bg: "white" },
 
   // Row 2 — 4 logos
-  { src: Client6, alt: "Pretty Little Thing", size: "large", bg: "black" },
+  { src: Client6, alt: "Pretty Little Thing", size: "large", bg: "white" },
   { src: Client2, alt: "D4 Denim", size: "large", bg: "white" },
   { src: Client3, alt: "LVD", size: "large", bg: "none" },
-  { src: Client11, alt: "Crosshatch", size: "large", bg: "black" },
+  { src: Client11, alt: "Crosshatch", size: "large", bg: "white" },
 
   // Row 3 — 5 logos
   { src: Client5, alt: "Disaster", size: "medium", bg: "none" },
@@ -46,7 +46,7 @@ const ROWS = [
 ];
 
 const SIZES = {
-  hero: { w: 320, h: 100 },
+  hero: { w: 420, h: 110 },
   large: { w: 200, h: 68 },
   medium: { w: 170, h: 60 },
 };
