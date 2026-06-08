@@ -20,14 +20,14 @@ const Home = () => {
       <main>
         <Hero />
         <OurWork />
+        <VideoSection />
         {/* <WheelSection /> */}
         {/* <FeaturePillars /> */}
         <Collections />
         {/* <Capabilities /> */}
-        <StylesSection />
-        <VideoSection />
         <FactorySection />
         <WorldAndUs />
+        <StylesSection />
         <OurClients />
       </main>
       <Footer />

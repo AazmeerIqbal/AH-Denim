@@ -621,10 +621,10 @@ const SectionIntro = () => {
               transform: visible ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 0.8s ease 0.08s, transform 0.8s ease 0.08s',
             }}>
-              Our Signature
+              THE FULL SPECTRUM OF
               <br />
               <span style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)', color: 'transparent' }}>
-                Styles
+                CRAFT
               </span>
             </h2>
 
@@ -634,7 +634,7 @@ const SectionIntro = () => {
           {/* Right: description + scroll hint */}
           <div style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(20px)', transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s' }}>
             <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 'clamp(0.82rem, 1.2vw, 0.95rem)', fontWeight: 300, lineHeight: 1.85, letterSpacing: '0.03em', margin: '0 0 1.5rem', maxWidth: 480 }}>
-              From precision laser artistry to hand-crafted embroidery — every technique we offer is a statement. Scroll through our signature styles and discover the craft behind each garment.
+              Simple silhouettes or intricate detailing — we do both with the same obsession. Explore our extended range of techniques, finishes, and styles that go far beyond the ordinary.
             </p>
             {/* Scroll cue */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
