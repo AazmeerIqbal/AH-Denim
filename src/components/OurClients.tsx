@@ -37,9 +37,9 @@ const LOGOS = [
 
 const ROWS = [
   [0],           // hero
-  [1, 2, 3, 4],  // row 2
-  [5, 6, 7, 8, 9], // row 3
-  [10, 11, 12],  // row 4
+  [1, 2],        // row 2 — Pretty Little Thing, Crosshatch
+  [3, 4, 5, 6, 7], // row 3
+  [8, 9, 10],    // row 4
 ];
 
 const SIZES = {
@@ -223,7 +223,7 @@ export default function OurClients() {
         {/* BOTTOM TAGLINE */}
         <div style={{ ...anim(0.9), textAlign: "center", marginTop: "clamp(2rem, 4vw, 3rem)" }}>
           <p style={{ color: "rgba(255,255,255,0.12)", fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 300 }}>
-            13+ Global Fashion Brands & Growing
+            11+ Global Fashion Brands & Growing
           </p>
         </div>
       </div>
