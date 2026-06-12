@@ -8,10 +8,10 @@ interface RegionData {
 }
 
 const regions: RegionData[] = [
-  { name: "United Kingdom", percentage: 50, color: "#93c5fd", market: "Primary Market" },
-  { name: "United Arab Emirates", percentage: 20, color: "#3b82f6", market: "Growing Hub" },
-  { name: "United States", percentage: 15, color: "#e2e8f0", market: "Emerging Market" },
-  { name: "Europe", percentage: 15, color: "#1e3a8a", market: "Expanding Reach" },
+  { name: "United Kingdom", percentage: 60, color: "#93c5fd", market: "Primary Market" },
+  // { name: "United Arab Emirates", percentage: 20, color: "#3b82f6", market: "Growing Hub" },
+  { name: "United States", percentage: 20, color: "#e2e8f0", market: "Emerging Market" },
+  { name: "Europe", percentage: 20, color: "#1e3a8a", market: "Expanding Reach" },
 ];
 
 const WorldAndUs: React.FC = () => {
@@ -443,7 +443,7 @@ const WorldAndUs: React.FC = () => {
                       lineHeight: 1,
                     }}
                   >
-                    4
+                    3
                   </span>
                   <span
                     style={{

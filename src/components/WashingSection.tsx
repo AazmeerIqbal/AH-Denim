@@ -12,22 +12,6 @@ import WashImage8 from "/images/washing/8.jpeg";
 const STEPS = [
     {
         num: "01",
-        title: "Water Supply System",
-        subtitle: "Production Infrastructure",
-        desc: "Every wash begins at the source. Our dedicated production tank network supplies precisely controlled water to every machine on the floor — maintaining consistent temperature, pressure, and chemical ratios for repeatable results across every batch.",
-        tag: "Foundation",
-        image: WashImage1,
-    },
-    {
-        num: "02",
-        title: "Garment Loading",
-        subtitle: "Pre-Wash Preparation",
-        desc: "Raw denim is sorted by weight, colour, and wash recipe before being loaded onto the floor. Careful batching ensures consistent results — every garment in a run receives identical treatment from the first rinse to the final finish.",
-        tag: "Preparation",
-        image: WashImage7,
-    },
-    {
-        num: "03",
         title: "Industrial Washing",
         subtitle: "Yilmak EcoGreen EG-W 400",
         desc: "Our Yilmak EcoGreen machines run stone wash, enzyme wash, and colour-correction cycles with precision-controlled drum speed, temperature, and chemical dosing. The closed-loop system recycles up to 60% of water — reducing consumption without compromising quality.",
@@ -35,12 +19,28 @@ const STEPS = [
         image: WashImage2,
     },
     {
-        num: "04",
+        num: "02",
         title: "Full Floor Operations",
         subtitle: "Scale & Throughput",
         desc: "Our two-floor laundry facility runs multiple wash programmes simultaneously. With a fleet of industrial washers operating in parallel, we process thousands of garments per shift while maintaining strict quality checks between every cycle.",
         tag: "Capacity",
         image: WashImage3,
+    },
+    {
+        num: "03",
+        title: "Water Supply System",
+        subtitle: "Production Infrastructure",
+        desc: "Every wash begins at the source. Our dedicated production tank network supplies precisely controlled water to every machine on the floor — maintaining consistent temperature, pressure, and chemical ratios for repeatable results across every batch.",
+        tag: "Foundation",
+        image: WashImage1,
+    },
+    {
+        num: "04",
+        title: "Garment Loading",
+        subtitle: "Pre-Wash Preparation",
+        desc: "Raw denim is sorted by weight, colour, and wash recipe before being loaded onto the floor. Careful batching ensures consistent results — every garment in a run receives identical treatment from the first rinse to the final finish.",
+        tag: "Preparation",
+        image: WashImage7,
     },
     {
         num: "05",

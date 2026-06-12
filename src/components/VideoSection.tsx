@@ -139,92 +139,188 @@ const VideoSection = () => {
         </div>
       </section>
 
-      {/* ── OUR WASHING CTA — below the whole section ── */}
+      {/* ── OUR WASHING CTA — full-width banner ── */}
       <div
         style={{
+          width: '100%',
           backgroundColor: '#030b13',
-          borderTop: '1px solid rgba(255,255,255,0.05)',
-          padding: 'clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 5rem)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '1.4rem',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
           position: 'relative',
           overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'row',
+          minHeight: 'clamp(420px, 55vw, 680px)',
         }}
       >
-        {/* Subtle glow behind CTA */}
-        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 50% 80% at 50% 100%, rgba(13,33,71,0.55) 0%, transparent 65%)' }} />
-
-        {/* Eyebrow */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative', zIndex: 1 }}>
-          <div style={{ width: 28, height: 1, background: 'rgba(147,197,253,0.4)' }} />
-          <span style={{ color: 'rgba(147,197,253,0.6)', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.32em', textTransform: 'uppercase' }}>
-            Explore Our Process
-          </span>
-          <div style={{ width: 28, height: 1, background: 'rgba(147,197,253,0.4)' }} />
-        </div>
-
-        {/* Text */}
-        <p style={{
-          color: 'rgba(255,255,255,0.4)',
-          fontSize: 'clamp(0.8rem, 1.2vw, 0.92rem)',
-          fontWeight: 300,
-          lineHeight: 1.8,
-          letterSpacing: '0.03em',
-          textAlign: 'center',
-          maxWidth: 520,
-          margin: 0,
-          position: 'relative',
-          zIndex: 1,
-        }}>
-          From stonewash to enzyme treatments — discover the full range of washing and finishing techniques that give our denim its character.
-        </p>
-
-        {/* Button */}
-        <a
-          href="/AboutUS#our-washing"
+        {/* ── LEFT: Text content ── */}
+        <div
           style={{
+            flex: '1 1 50%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: 'clamp(3rem, 7vw, 7rem) clamp(2rem, 6vw, 6rem)',
             position: 'relative',
-            zIndex: 1,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            padding: '0.9rem 2.4rem',
-            background: 'transparent',
-            border: '1px solid rgba(147,197,253,0.38)',
-            color: 'rgba(147,197,253,0.9)',
-            fontSize: '0.62rem',
-            fontWeight: 700,
-            letterSpacing: '0.24em',
-            textTransform: 'uppercase',
-            textDecoration: 'none',
-            transition: 'all 0.3s ease',
-          }}
-          onMouseEnter={e => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = 'rgba(147,197,253,0.08)';
-            el.style.borderColor = 'rgba(147,197,253,0.75)';
-            el.style.color = '#fff';
-            el.style.boxShadow = '0 0 28px rgba(147,197,253,0.12)';
-          }}
-          onMouseLeave={e => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = 'transparent';
-            el.style.borderColor = 'rgba(147,197,253,0.38)';
-            el.style.color = 'rgba(147,197,253,0.9)';
-            el.style.boxShadow = 'none';
+            zIndex: 2,
           }}
         >
-          {/* Water drop */}
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2C6 10 4 14 4 16a8 8 0 0016 0c0-2-2-6-8-14z" />
-          </svg>
-          Our Washing
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+          {/* Radial glow */}
+          <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(ellipse 80% 70% at 0% 60%, rgba(13,33,71,0.7) 0%, transparent 70%)' }} />
+
+          {/* Eyebrow */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: 'clamp(1.2rem, 2.5vw, 2rem)', position: 'relative' }}>
+            <div style={{ width: 36, height: 1, background: 'rgba(147,197,253,0.45)' }} />
+            <span style={{ color: 'rgba(147,197,253,0.65)', fontSize: 'clamp(0.55rem, 0.7vw, 0.7rem)', fontWeight: 700, letterSpacing: '0.35em', textTransform: 'uppercase' }}>
+              Explore Our Process
+            </span>
+          </div>
+
+          {/* Main headline */}
+          <h2 style={{
+            color: '#ffffff',
+            fontFamily: "'Arial Black', Impact, sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(2.4rem, 5vw, 5.5rem)',
+            textTransform: 'uppercase',
+            lineHeight: 1.0,
+            letterSpacing: '-0.02em',
+            margin: '0 0 clamp(1rem, 2vw, 1.5rem)',
+            position: 'relative',
+          }}>
+            See Our<br />
+            <span style={{ color: 'rgba(147,197,253,0.85)' }}>Whole</span><br />
+            Washing<br />
+            Process
+          </h2>
+
+          {/* Accent line */}
+          <div style={{ width: 70, height: 2, background: 'linear-gradient(to right, rgba(147,197,253,0.7), transparent)', marginBottom: 'clamp(1.2rem, 2.5vw, 2rem)', position: 'relative' }} />
+
+          {/* Description */}
+          <p style={{
+            color: 'rgba(255,255,255,0.45)',
+            fontSize: 'clamp(0.82rem, 1.1vw, 1.05rem)',
+            fontWeight: 300,
+            lineHeight: 1.85,
+            letterSpacing: '0.02em',
+            maxWidth: 440,
+            margin: '0 0 clamp(2rem, 3.5vw, 3rem)',
+            position: 'relative',
+          }}>
+            From stonewash to enzyme treatments — discover the full range of washing and finishing techniques that give our denim its unique character, texture, and longevity.
+          </p>
+
+          {/* CTA Button */}
+          <div style={{ position: 'relative' }}>
+            <a
+              href="/AboutUS#our-washing"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: 'clamp(0.9rem, 1.5vw, 1.2rem) clamp(1.8rem, 3vw, 3rem)',
+                background: 'rgba(147,197,253,0.07)',
+                border: '1px solid rgba(147,197,253,0.4)',
+                color: 'rgba(147,197,253,0.95)',
+                fontSize: 'clamp(0.62rem, 0.85vw, 0.82rem)',
+                fontWeight: 700,
+                letterSpacing: '0.28em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'all 0.35s ease',
+                borderRadius: '2px',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.background = 'rgba(147,197,253,0.15)';
+                el.style.borderColor = 'rgba(147,197,253,0.8)';
+                el.style.color = '#fff';
+                el.style.boxShadow = '0 0 40px rgba(147,197,253,0.18), inset 0 0 20px rgba(147,197,253,0.04)';
+                el.style.letterSpacing = '0.32em';
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.background = 'rgba(147,197,253,0.07)';
+                el.style.borderColor = 'rgba(147,197,253,0.4)';
+                el.style.color = 'rgba(147,197,253,0.95)';
+                el.style.boxShadow = 'none';
+                el.style.letterSpacing = '0.28em';
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2C6 10 4 14 4 16a8 8 0 0016 0c0-2-2-6-8-14z" />
+              </svg>
+              View Washing Process
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* ── RIGHT: Washing image panel ── */}
+        <div
+          style={{
+            flex: '1 1 50%',
+            position: 'relative',
+            minHeight: '100%',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Main image */}
+          <img
+            src="/images/washing/2.jpeg"
+            alt="Our washing process"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+              filter: 'brightness(0.6) saturate(0.65)',
+              position: 'absolute',
+              inset: 0,
+            }}
+          />
+
+          {/* Left-side fade into dark bg */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #030b13 0%, rgba(3,11,19,0.4) 30%, transparent 60%)' }} />
+          {/* Bottom fade */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(3,11,19,0.6) 0%, transparent 40%)' }} />
+
+          {/* Floating label badge */}
+          <div style={{
+            position: 'absolute',
+            top: 'clamp(1.5rem, 3vw, 2.5rem)',
+            right: 'clamp(1.5rem, 3vw, 2.5rem)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            background: 'rgba(3,11,19,0.7)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(147,197,253,0.2)',
+            borderRadius: '50px',
+            padding: '0.5rem 1.1rem',
+          }}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(147,197,253,0.85)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2C6 10 4 14 4 16a8 8 0 0016 0c0-2-2-6-8-14z" />
+            </svg>
+            <span style={{ color: 'rgba(147,197,253,0.85)', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase' }}>
+              Washing
+            </span>
+          </div>
+
+          {/* Bottom-right corner stat */}
+          <div style={{
+            position: 'absolute',
+            bottom: 'clamp(1.5rem, 3vw, 2.5rem)',
+            right: 'clamp(1.5rem, 3vw, 2.5rem)',
+            textAlign: 'right',
+          }}>
+            <div style={{ color: '#fff', fontSize: 'clamp(1.8rem, 3.5vw, 3.5rem)', fontFamily: "'Arial Black', Impact, sans-serif", fontWeight: 900, lineHeight: 1, letterSpacing: '-0.02em' }}>20+</div>
+            <div style={{ color: 'rgba(147,197,253,0.6)', fontSize: 'clamp(0.5rem, 0.7vw, 0.65rem)', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', marginTop: '0.25rem' }}>Wash Techniques</div>
+          </div>
+        </div>
       </div>
     </>
   );

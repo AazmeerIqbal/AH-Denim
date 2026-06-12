@@ -56,7 +56,7 @@ const AboutUs = () => {
 
   const { ref: overviewRef, inView: overviewInView } = useInView({ triggerOnce: true, threshold: 0.3 });
   const { ref: aboutRef, visible: aboutVisible } = useScrollReveal(0.1);
-  const { ref: videoRef, visible: videoVisible } = useScrollReveal(0.1);
+  // const { ref: videoRef, visible: videoVisible } = useScrollReveal(0.1);
   const { ref: expoRef, visible: expoVisible } = useScrollReveal(0.1);
 
   return (
@@ -104,7 +104,7 @@ const AboutUs = () => {
         </section>
 
         {/* ── VIDEO SECTION ── */}
-        <section
+        {/* <section
           ref={videoRef}
           id="our-video"
           style={{
@@ -120,7 +120,7 @@ const AboutUs = () => {
               <source src={AboutVideo} type="video/mp4" />
             </video>
           </div>
-        </section>
+        </section> */}
 
         {/* ── OVERVIEW NUMBERS ── */}
         <section
