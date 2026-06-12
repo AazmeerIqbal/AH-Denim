@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 
 import Client1 from "/images/Clients/bohoo_group.png";
-import Client2 from "/images/Clients/d4denim.png";
-import Client3 from "/images/Clients/lvd.png";
+
 import Client4 from "/images/Clients/B Couture.png";
 import Client5 from "/images/Clients/disaster.png";
 import Client6 from "/images/Clients/prettylittlethings.png";
@@ -21,8 +20,6 @@ const LOGOS = [
 
   // Row 2 — 4 logos
   { src: Client6, alt: "Pretty Little Thing", size: "large", bg: "white" },
-  { src: Client2, alt: "D4 Denim", size: "large", bg: "white" },
-  { src: Client3, alt: "LVD", size: "large", bg: "none" },
   { src: Client11, alt: "Crosshatch", size: "large", bg: "white" },
 
   // Row 3 — 5 logos
